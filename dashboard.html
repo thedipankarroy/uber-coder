@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ubercodes - Personal Dashboard</title>
+  <link rel="stylesheet" href="/styles/dashboard.css">
+  <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <h1>Welcome Back, <span id="userName">User</span>!</h1>
+          <p>Track your GSOC 2025 preparation progress</p>
+        </div>
+        <button id="logout-button" style="padding: 10px 20px; border: none; border-radius: 5px; background: #ff4444; color: white; cursor: pointer;">
+          Logout
+        </button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="tabs">
+        <button class="tab-button active" data-tab="dashboard">Dashboard</button>
+        <button class="tab-button" data-tab="events">Events</button>
+        <button class="tab-button" data-tab="tasks">Tasks</button>
+      </div>
+      <div id="dashboard" class="tab-content active">
+        <h2>Dashboard</h2>
+        <p>Problems Solved: <span id="problemsSolved">0</span></p>
+        <p>GitHub Streak: <span id="githubStreak">0</span></p>
+        <p>Projects Completed: <span id="projectsCompleted">0</span></p>
+        <div class="progress-bar">
+          <div id="gsocProgress" class="progress" style="width: 0%;"></div>
+        </div>
+        <p>Progress: <span id="progressPercent">0</span>%</p>
+      </div>
+      <div id="events" class="tab-content">
+        <h2>Events</h2>
+        <div id="eventsList"></div>
+      </div>
+      <div id="tasks" class="tab-content">
+        <h2>Tasks</h2>
+        <ul>
+          <li><input type="checkbox" class="task-checkbox"> Task 1</li>
+          <li><input type="checkbox" class="task-checkbox"> Task 2</li>
+          <li><input type="checkbox" class="task-checkbox"> Task 3</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCf3OuJ3LfQIOrY_ytB-VMwPTm2jaKIBJ4",
+      authDomain: "ubercoders.firebaseapp.com",
+      projectId: "ubercoders",
+      storageBucket: "ubercoders.firebasestorage.app",
+      messagingSenderId: "648246074997",
+      appId: "1:648246074997:web:d8724fc2c7aed70c6ee23c",
+      measurementId: "G-02D2QNJ8P7",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        document.getElementById("userName").textContent = user.displayName;
+      }
+    });
+
+    const userData = {
+      name: "User",
+      problemsSolved: 120,
+      githubStreak: 15,
+      projectsCompleted: 3,
+      gsocProgress: 65,
+    };
+
+    const events = [
+      { date: "2024-12-30", title: "Mock GSOC Interview" },
+      { date: "2025-01-05", title: "DSA Problem Solving Session" },
+      { date: "2025-01-10", title: "Project Review Meeting" },
+      { date: "2025-01-15", title: "GSOC Organization Research" },
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("userName").textContent = userData.name;
+      document.getElementById("problemsSolved").textContent = userData.problemsSolved;
+      document.getElementById("githubStreak").textContent = userData.githubStreak;
+      document.getElementById("projectsCompleted").textContent = userData.projectsCompleted;
+      document.getElementById("gsocProgress").style.width = `${userData.gsocProgress}%`;
+      document.getElementById("progressPercent").textContent = userData.gsocProgress;
+
+      const eventsList = document.getElementById("eventsList");
+      events.forEach((event) => {
+        const eventDiv = document.createElement("div");
+        eventDiv.className = "event-item";
+        eventDiv.innerHTML = `<h3>${event.title}</h3><p class="date">${event.date}</p>`;
+        eventsList.appendChild(eventDiv);
+      });
+
+      const tabButtons = document.querySelectorAll(".tab-button");
+      const tabContents = document.querySelectorAll(".tab-content");
+
+      tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const tabName = button.getAttribute("data-tab");
+
+          tabButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+
+          tabContents.forEach((content) => {
+            content.classList.remove("active");
+            if (content.id === tabName) {
+              content.classList.add("active");
+            }
+          });
+        });
+      });
+
+      const checkboxes = document.querySelectorAll('.task-checkbox');
+      checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener("change", updateProgress);
+      });
+
+      function updateProgress() {
+        const totalTasks = checkboxes.length;
+        const completedTasks = Array.from(checkboxes).filter((checkbox) => checkbox.checked).length;
+        const newProgress = Math.round((completedTasks / totalTasks) * 100);
+
+        document.getElementById("gsocProgress").style.width = `${newProgress}%`;
+        document.getElementById("progressPercent").textContent = newProgress;
+      }
+    });
+
+    document.getElementById("logout-button").addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        window.location.href = "index.html";
+      } catch (error) {
+        console.error("Logout error:", error);
+        alert("Error logging out. Please try again.");
+      }
+    });
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+</body>
+</html>
