@@ -26,6 +26,19 @@ signupForm.addEventListener("submit", async (e) => {
   const username = document.getElementById("signup-username").value.trim();
   const email = document.getElementById("signup-email").value.trim();
   const password = document.getElementById("signup-password").value;
+  function validatePassword(password) {
+    // At least 8 characters long
+    // Contains uppercase and lowercase letters
+    // Contains at least one number
+    // Contains at least one special character
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return passwordRegex.test(password);
+}
+
+  if (!validatePassword(password)) {
+    alert("Password must be at least 8 characters long, contain uppercase and lowercase letters, at least one number, and at least one special character.");
+    return;
+  }
 
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -68,27 +81,27 @@ loginForm.addEventListener("submit", async (e) => {
 });
 
 // Detect User Authentication State
-onAuthStateChanged(auth, (user) => {
+    if (window.location.pathname.endsWith("index.html") || window.location.pathname === "/") {
   if (user) {
     // User is logged in
     console.log("User is logged in:", user.email);
     // If already on login or signup page, redirect to dashboard
-    if (window.location.pathname === "/index.html" || window.location.pathname === "/") {
+    if (window.location.href.includes("index.html") || window.location.href.endsWith("/")) {
       window.location.href = "dashboard.html";
     }
   } else {
     // User is logged out
     console.log("User is logged out");
     // If on dashboard page, redirect to login page
-    if (window.location.pathname === "/dashboard.html") {
+    if (window.location.href.includes("dashboard.html")) {
       window.location.href = "index.html";
     }
   }
-});
+};
 
 // Handle Log Out
 const logoutButton = document.getElementById("logout-button");
-if (logoutButton) {
+if (logoutButton !== null) {
   logoutButton.addEventListener("click", async () => {
     try {
       await signOut(auth);
