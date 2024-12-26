@@ -2,12 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- favicon -->
+    <link
+      rel="icon"
+      type="image/webp"
+      href="/images/favicon.webp"
     />
     <title>UberCoders</title>
-    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/style.css" />
     <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js"></script>
   </head>
@@ -17,9 +20,7 @@
       <div id="signup-form">
         <form>
           <div class="form-group">
-            <label for="signup-username"
-              >Username</label
-            >
+            <label for="signup-username">Username</label>
             <input
               type="text"
               id="signup-username"
@@ -28,9 +29,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="signup-email"
-              >Email</label
-            >
+            <label for="signup-email">Email</label>
             <input
               type="email"
               id="signup-email"
@@ -39,9 +38,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="signup-password"
-              >Password</label
-            >
+            <label for="signup-password">Password</label>
             <input
               type="password"
               id="signup-password"
@@ -49,13 +46,9 @@
               required
             />
           </div>
-          <button type="submit" class="button">
-            Sign Up
-          </button>
+          <button type="submit" class="button">Sign Up</button>
         </form>
-        <span
-          class="toggle-link"
-          onclick="toggleForm()"
+        <span class="toggle-link" onclick="toggleForm()"
           >Already have an account? Log In</span
         >
       </div>
@@ -71,9 +64,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="login-password"
-              >Password</label
-            >
+            <label for="login-password">Password</label>
             <input
               type="password"
               id="login-password"
@@ -81,13 +72,9 @@
               required
             />
           </div>
-          <button type="submit" class="button">
-            Log In
-          </button>
+          <button type="submit" class="button">Log In</button>
         </form>
-        <span
-          class="toggle-link"
-          onclick="toggleForm()"
+        <span class="toggle-link" onclick="toggleForm()"
           >Don't have an account? Sign Up</span
         >
       </div>
@@ -95,10 +82,8 @@
 
     <script>
       function toggleForm() {
-        const signupForm =
-          document.getElementById("signup-form");
-        const loginForm =
-          document.getElementById("login-form");
+        const signupForm = document.getElementById("signup-form");
+        const loginForm = document.getElementById("login-form");
 
         if (signupForm.style.display === "none") {
           signupForm.style.display = "block";
@@ -109,6 +94,6 @@
         }
       }
     </script>
-  <script type="module" src="script/index.js" defer></script>
+    <script type="module" src="script/index.js" defer></script>
   </body>
 </html>
