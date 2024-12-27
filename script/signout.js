@@ -26,7 +26,7 @@ document
   .addEventListener("click", async () => {
     try {
       await signOut(auth);
-      window.location.href = "index.html";
+      window.location.href = "sign-up-page.html";
     } catch (error) {
       console.error("Logout error:", error);
       alert(
@@ -38,6 +38,6 @@ document
 // Check auth state
 onAuthStateChanged(auth, (user) => {
   if (!user) {
-    window.location.href = "index.html";
+    window.location.href = "sign-up-page.html";
   }
 });

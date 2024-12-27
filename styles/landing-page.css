@@ -1,0 +1,331 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(
+    180deg,
+    #111827 0%,
+    #1f2937 60%,
+    #111827 100%
+  );
+  color: white;
+  transition: background 0.5s ease;
+}
+
+.glass-effect {
+  background: rgba(31, 41, 55, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Updated Navbar Styles */
+.navbar {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
+  z-index: 1000;
+  padding: 1rem 2rem;
+  background: rgba(31, 41, 55, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: relative;
+  z-index: 2;
+}
+
+.logo i {
+  color: #3b82f6;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  position: relative;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 1rem;
+}
+
+.nav-links a::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #3b82f6;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::before {
+  width: 100%;
+}
+
+.nav-links a:hover {
+  color: #3b82f6;
+  transform: translateY(-2px);
+}
+
+/* Adjust header padding to account for fixed navbar */
+header {
+  padding: 2rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Rest of the previous styles remain the same */
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+
+  .nav-links {
+    display: none;
+  }
+}
+
+/* Hero Section */
+.hero {
+  padding: 2rem 0;
+  padding-top: 10rem;
+  max-width: 56rem;
+  margin: 0 auto;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 span {
+  color: #3b82f6;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  color: #d1d5db;
+  margin-bottom: 2rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn {
+  align-items: center;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.btn i {
+  margin-left: 0.5rem;
+}
+
+.btn-primary {
+  background-color: rgba(59, 130, 246, 0.8);
+  color: white;
+  border: none;
+  backdrop-filter: blur(4px);
+}
+
+.btn-primary:hover {
+  background-color: rgba(37, 99, 235, 0.9);
+}
+
+.btn-secondary {
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  color: white;
+  background: transparent;
+  backdrop-filter: blur(4px);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* Program Section */
+.program {
+  padding: 5rem 0;
+  background-color: rgba(31, 41, 55, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+.section-title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  );
+  gap: 3rem;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 1.5rem;
+  transition: transform 0.2s,
+    background-color 0.2s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  background-color: rgba(55, 65, 81, 0.3);
+}
+
+.feature-card i {
+  color: #3b82f6;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+  color: #9ca3af;
+}
+
+/* Timeline Section */
+.timeline {
+  padding: 5rem 0;
+}
+
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  );
+  gap: 2rem;
+}
+
+.timeline-card {
+  padding: 1.5rem;
+  transition: transform 0.2s;
+}
+
+.timeline-card:hover {
+  transform: translateY(-5px);
+  background-color: rgba(55, 65, 81, 0.3);
+}
+
+.timeline-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.timeline-card ul {
+  list-style: none;
+}
+
+.timeline-card li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.timeline-card li::before {
+  content: "";
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: #3b82f6;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+/* Footer */
+.program,
+.timeline,
+.community {
+  background: rgba(
+    31,
+    41,
+    55,
+    0.3
+  ); /* Slightly transparent */
+  backdrop-filter: blur(8px);
+  padding: 5rem 0;
+}
+
+footer {
+  backdrop-filter: blur(8px);
+  padding: 2rem 0;
+  color: #9ca3af;
+  text-align: center;
+}
+
+/* Add glass effect to all cards */
+.feature-card,
+.timeline-card {
+  background: rgba(31, 41, 55, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
