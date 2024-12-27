@@ -228,16 +228,3 @@ document.addEventListener(
     }
   }
 );
-// Add session timeout
-let sessionTimeout;
-
-function resetSessionTimeout() {
-    clearTimeout(sessionTimeout);
-    sessionTimeout = setTimeout(() => {
-        signOut(auth);
-        window.location.href = "index.html";
-    }, 1 * 10 * 1000); // 10 seconds
-}
-
-document.addEventListener('mousemove', resetSessionTimeout);
-document.addEventListener('keypress', resetSessionTimeout);
