@@ -1,56 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ubercodes - Personal Dashboard</title>
-  <link rel="stylesheet" href="/styles/dashboard.css">
-  <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js"></script>
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <div>
-          <h1>Welcome Back, <span id="userName">User</span>!</h1>
-          <p>Track your GSOC 2025 preparation progress</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Ubercodes - Personal Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="/styles/dashboard.css"
+    />
+    <script
+      defer
+      data-domain="ubercoders.in"
+      src="https://plausible.io/js/script.file-downloads.js"
+    ></script>
+    <script>
+      window.plausible =
+        window.plausible ||
+        function () {
+          (window.plausible.q =
+            window.plausible.q || []).push(
+            arguments
+          );
+        };
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <div>
+            <h1>
+              Welcome Back,
+              <span id="userName">User</span>!
+            </h1>
+            <p>
+              Track your GSOC 2025 preparation
+              progress
+            </p>
+          </div>
+          <button
+            id="logout-button"
+            style="
+              padding: 10px 20px;
+              border: none;
+              border-radius: 5px;
+              background: #ff4444;
+              color: white;
+              cursor: pointer;
+            "
+          >
+            Logout
+          </button>
         </div>
-        <button id="logout-button" style="padding: 10px 20px; border: none; border-radius: 5px; background: #ff4444; color: white; cursor: pointer;">
-          Logout
-        </button>
+      </div>
+      <div class="content">
+        <div class="tabs">
+          <button
+            class="tab-button active"
+            data-tab="dashboard"
+          >
+            Dashboard
+          </button>
+          <button
+            class="tab-button"
+            data-tab="events"
+          >
+            Events
+          </button>
+          <button
+            class="tab-button"
+            data-tab="tasks"
+          >
+            Tasks
+          </button>
+        </div>
+        <div
+          id="dashboard"
+          class="tab-content active"
+        >
+          <h2>Dashboard</h2>
+          <p>
+            Problems Solved:
+            <span id="problemsSolved">0</span>
+          </p>
+          <p>
+            GitHub Streak:
+            <span id="githubStreak">0</span>
+          </p>
+          <p>
+            Projects Completed:
+            <span id="projectsCompleted">0</span>
+          </p>
+          <div class="progress-bar">
+            <div
+              id="gsocProgress"
+              class="progress"
+              style="width: 0%"
+            ></div>
+          </div>
+          <p>
+            Progress:
+            <span id="progressPercent">0</span>%
+          </p>
+        </div>
+        <div id="events" class="tab-content">
+          <h2>Events</h2>
+          <div id="eventsList"></div>
+        </div>
+        <div id="tasks" class="tab-content">
+          <h2>Tasks</h2>
+          <ul>
+            <li>
+              <input
+                type="checkbox"
+                class="task-checkbox"
+              />
+              Task 1
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                class="task-checkbox"
+              />
+              Task 2
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                class="task-checkbox"
+              />
+              Task 3
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-    <div class="content">
-      <div class="tabs">
-        <button class="tab-button active" data-tab="dashboard">Dashboard</button>
-        <button class="tab-button" data-tab="events">Events</button>
-        <button class="tab-button" data-tab="tasks">Tasks</button>
-      </div>
-      <div id="dashboard" class="tab-content active">
-        <h2>Dashboard</h2>
-        <p>Problems Solved: <span id="problemsSolved">0</span></p>
-        <p>GitHub Streak: <span id="githubStreak">0</span></p>
-        <p>Projects Completed: <span id="projectsCompleted">0</span></p>
-        <div class="progress-bar">
-          <div id="gsocProgress" class="progress" style="width: 0%;"></div>
-        </div>
-        <p>Progress: <span id="progressPercent">0</span>%</p>
-      </div>
-      <div id="events" class="tab-content">
-        <h2>Events</h2>
-        <div id="eventsList"></div>
-      </div>
-      <div id="tasks" class="tab-content">
-        <h2>Tasks</h2>
-        <ul>
-          <li><input type="checkbox" class="task-checkbox"> Task 1</li>
-          <li><input type="checkbox" class="task-checkbox"> Task 2</li>
-          <li><input type="checkbox" class="task-checkbox"> Task 3</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <script type="module" src="script/dashboard.js" defer></script>
-</body>
+    <script
+      type="module"
+      src="script/dashboard.js"
+      defer
+    ></script>
+  </body>
 </html>
