@@ -150,6 +150,10 @@ body {
   margin-right: 10px;
 }
 
+.task-checkbox{
+  margin-right: 10px;
+}
+
 @media (max-width: 768px) {
   .stats-grid {
     grid-template-columns: 1fr;
