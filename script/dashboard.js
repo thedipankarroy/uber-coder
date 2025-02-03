@@ -47,6 +47,8 @@ const initialEvents = [
   },
 ];
 
+
+
 document.addEventListener(
   "DOMContentLoaded",
   () => {
@@ -239,11 +241,19 @@ document.addEventListener(
       const eventDiv =
         document.createElement("div");
       eventDiv.className = "event-item";
+      // check Box is created
+      const checkbox = document.createElement("input");
+       checkbox.type = "checkbox";
+       checkbox.className = "event-checkbox";
+       checkbox.style.marginRight = "10px";
       eventDiv.innerHTML = `
             <h3>${event.title}</h3>
             <p class="date">${event.date}</p>
         `;
+      // calling prepend on h3 so checkbox placed before event title  
+      eventDiv.querySelector("h3").prepend(checkbox); 
       eventsList.appendChild(eventDiv);
+      
     });
 
     // Tab functionality
